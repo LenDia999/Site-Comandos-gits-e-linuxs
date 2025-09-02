@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia Git & GitHub — HTML/CSS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --muted: #4a5568;
+      --text: #1a202c;
+      --brand: #3182ce;
+      --accent: #2f855a;
+      --border: #e2e8f0; 
+      --code-bg:#edf2f7;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Roboto,system-ui,Arial,sans-serif;
+      background: var(--bg);
+      color:var(--text);
+    }
+    header{
+      position:sticky; top:0; z-index:10;
+      background: var(--brand);
+      color: #fff;
+      border-bottom:1px solid var(--border);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:18px 20px}
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--accent)); box-shadow:0 4px 12px #0003}
+    h1{font-size:1.35rem; letter-spacing:.2px; margin:0}
+    .small{font-size:.9rem; opacity:0.9}
+
+    main{max-width:1100px; margin:28px auto; padding:0 20px; display:grid; grid-template-columns: 260px 1fr; gap:22px}
+    .side{position:sticky; top:88px; align-self:start; display:flex; flex-direction:column; gap:8px}
+    .side a{display:block; text-decoration:none; color:var(--text); padding:10px 12px; border:1px solid var(--border); border-radius:12px; background: #fff}
+    .side a:hover{border-color:var(--brand); color:var(--brand); background:#ebf8ff}
+    .content{display:flex; flex-direction:column; gap:22px}
+
+    section{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:22px; box-shadow:0 2px 6px #0001}
+    section h2{margin:0 0 8px; font-size:1.25rem; color:var(--brand)}
+    section p{color:var(--muted); line-height:1.7}
+    ul,ol{color:var(--muted)}
+    .tip{border-left:3px solid var(--accent); padding-left:12px; margin:8px 0; color:var(--accent)}
+
+    .code{background:var(--code-bg); border:1px solid var(--border); border-radius:10px; padding:14px; overflow:auto}
+    .code pre{margin:0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:.9rem; color:#2d3748}
+    .split{display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:14px}
+    table{width:100%; border-collapse: collapse; background:var(--code-bg); border:1px solid var(--border); border-radius:8px; overflow:hidden}
+    th, td{padding:10px 12px; border-bottom:1px solid var(--border); text-align:left; color:var(--muted)}
+    th{color:var(--text); background:#e2e8f0}
+    tr:last-child td{border-bottom:none}
+
+    footer{margin-top:40px; border-top:1px solid var(--border); background:#edf2f7}
+    footer .wrap{display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--muted)}
+
+    @media (max-width: 880px){ main{grid-template-columns: 1fr} .side{position:static; top:auto} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Guia rápido — Git & GitHub</h1>
+          <div class="small">Conceitos essenciais, comandos e passo a passo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <aside class="side">
+      <a href="#git">O que é o Git</a>
+      <a href="#github">O que é o GitHub</a>
+      <a href="#diferencas">Diferenças de Git x GitHub</a>
+      <a href="#linux-gitbash">Linux para Git Bash</a>
+      <a href="#linux-readme">Comandos do README</a>
+      <a href="#repo-github">Criar repositório</a>
+      <a href="#vincular-projeto">Vincular projeto existente</a>
+      <a href="#versao-git">Gerar versão (tags)</a>
+      <a href="#enviar-github">Enviar (push)</a>
+    </aside>
+
+    <div class="content">
+      <section id="git">
+        <h2>O que é o Git</h2>
+        <p>Git é um <strong>sistema de controle de versão distribuído</strong>. Ele registra o histórico de mudanças do seu código e permite trabalhar em paralelo, criar ramificações, voltar no tempo e colaborar com segurança.</p>
+        <div class="split">
+          <div class="code"><pre>$ git init
+$ git add .
+$ git commit -m "Primeiro commit"</pre></div>
+          <div class="tip">
+            <strong>Dica:</strong> cada commit descreve <em>o porquê</em> da mudança. Escreva mensagens claras!
+          </div>
+        </div>
+      </section>
+
+      <section id="github">
+        <h2>O que é o GitHub</h2>
+        <p>GitHub é uma <strong>plataforma de hospedagem</strong> para repositórios Git na nuvem, com recursos de colaboração, issues, pull requests, wiki, CI/CD e páginas estáticas (GitHub Pages).</p>
+      </section>
+
+      <section id="diferencas">
+        <h2>Diferenças entre Git e GitHub</h2>
+        <table aria-label="Comparação entre Git e GitHub">
+          <thead><tr><th>Git</th><th>GitHub</th></tr></thead>
+          <tbody>
+            <tr><td>Ferramenta de linha de comando instalada na sua máquina.</td><td>Serviço online para hospedar repositórios Git.</td></tr>
+            <tr><td>Gerencia versões localmente e remotamente.</td><td>Fornece recursos colaborativos e automações.</td></tr>
+            <tr><td>Ex.: <code>git add</code>, <code>git commit</code>, <code>git merge</code>.</td><td>Ex.: Pull Requests, Issues, Actions, Pages.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="linux-gitbash">
+        <h2>Principais comandos Linux para usar o Git Bash</h2>
+        <div class="code"><pre>$ pwd       # caminho atual
+$ ls        # listar arquivos
+$ ls -la    # listar arquivos ocultos
+$ cd pasta  # entrar na pasta
+$ cd ..     # voltar um nível
+$ mkdir dir # criar pasta
+$ touch a.txt # criar arquivo
+$ rm a.txt    # remover arquivo
+$ rm -r pasta # remover pasta
+</pre></div>
+      </section>
+
+      <section id="linux-readme">
+        <h2>Principais comandos Linux presentes no README</h2>
+        <div class="code"><pre>$ cd nome_da_pasta
+$ ls nome_da_pasta
+$ mkdir nome_da_pasta
+$ rm -r nome_da_pasta
+$ mv nome_atual nome_novo
+$ cp arquivo destino/
+</pre></div>
+      </section>
+
+      <section id="repo-github">
+        <h2>Como criar um repositório no GitHub</h2>
+        <ol>
+          <li>Acesse o GitHub e clique em <strong>New</strong>.</li>
+          <li>Defina nome, visibilidade e opcionalmente adicione um README.</li>
+          <li>Clique em <strong>Create repository</strong>.</li>
+        </ol>
+      </section>
+
+      <section id="vincular-projeto">
+        <h2>Como ligar (vincular) um projeto existente na máquina</h2>
+        <div class="code"><pre>$ git init
+$ git add .
+$ git commit -m "prepara projeto"
+$ git branch -M main
+$ git remote add origin https://github.com/usuario/repositorio.git
+</pre></div>
+      </section>
+
+      <section id="versao-git">
+        <h2>Como gerar uma versão com Git</h2>
+        <div class="code"><pre>$ git tag -a v1.0.0 -m "primeiro release"
+$ git push origin v1.0.0
+</pre></div>
+      </section>
+
+      <section id="enviar-github">
+        <h2>Como enviar da máquina para o GitHub</h2>
+        <div class="code"><pre>$ git push -u origin main
+</pre></div>
+      </section>
+
+      <footer>
+        <div class="wrap">
+          <div>© <span id="year"></span> • Feito por <strong>Igor Rossi</strong></div>
+          <div>Este site é apenas educacional.</div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
